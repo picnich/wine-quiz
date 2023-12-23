@@ -1,12 +1,14 @@
 "use client" 
 
 import { useState } from "react";
-import { quiz } from "../data";
+import { quiz } from "./data";
+import { Results } from "@/componets/Results";
 
 const QuizPage = () => {
-    const [ activeQuestion, setActiveQuestion ] = useState(0)
+    // State
+    const [ currentQuestion, setCurrentQuestion ] = useState(0)
     const [ selectedAnswer, setSelectedAnswer ] = useState("")
-    const [ checked, setChecked ] = useState(false)
+    const [ btnChecked, setBtnChecked ] = useState(false)
     const [ selectedAnswerIndex, setSelectedAnswerIndex ] = useState(null)
     const [ showResult, setShowResult ] = useState(false)
     const [ result, setResult ] = useState({ 
@@ -14,11 +16,17 @@ const QuizPage = () => {
         correctAnswers: 0,
         wrongAnswers: 0
     })
+    
+    // Data
     const { questions } = quiz;
-    const { question, answers, correctAnswer } = questions[activeQuestion]
+    const { question, answers, correctAnswer } = questions[currentQuestion]
+
+
+    // Display
+    const btnText = currentQuestion === questions.length - 1 ? "Finish" : "Next"
 
     function onAnswerSelected(answer, index) {
-        setChecked(true)
+        setBtnChecked(true)
         setSelectedAnswerIndex(index)
         if (answer === correctAnswer) {
             setSelectedAnswer(true);
@@ -31,7 +39,6 @@ const QuizPage = () => {
 
     // Calculate score and inc to next q
     function nextQuestion() {
-        // setSelectedAnswer(null);
         setSelectedAnswerIndex(null);
         
         setResult((prev) =>
@@ -44,19 +51,19 @@ const QuizPage = () => {
                 wrongAnswers: prev.wrongAnswers + 1
             }
         )
-        if (activeQuestion !== questions.length - 1) {
-            setActiveQuestion(prev => prev + 1)
+        if (currentQuestion !== questions.length - 1) {
+            setCurrentQuestion(prev => prev + 1)
         } else {
-            setActiveQuestion(0)
+            setCurrentQuestion(0)
             setShowResult(true)
         }
-        setChecked(false)
+        setBtnChecked(false)
     }
     return (
         <div className="container">
             <h1>Quiz Page</h1>  
             <div>
-                <h2>Question: {activeQuestion + 1}/<span>{questions.length}</span></h2>
+                <h2>Question: {currentQuestion + 1}/<span>{questions.length}</span></h2>
             </div>
             <div>
                 {
@@ -66,7 +73,7 @@ const QuizPage = () => {
                             <ul>
                                 {answers.map((answer, i) => (
                                         <li 
-                                            className={selectedAnswerIndex === i ? 'li-selected' : 'li-hover'} 
+                                            className={selectedAnswerIndex === i ? 'selected' : ''} 
                                             onClick={() => onAnswerSelected(answer, i)}
                                             key={i}>
                                                 <span>{answer}</span>
@@ -74,29 +81,10 @@ const QuizPage = () => {
                                     )
                                 )}
                             </ul>
-                            {
-                                checked ? (
-                                    <button onClick={nextQuestion} className="btn">
-                                        {activeQuestion === questions.length - 1 ? "Finish" : "Next" }
-                                    </button>
-                                ) : (
-                                    <button disabled onClick={nextQuestion} className="btn-disabled">
-                                        {activeQuestion === questions.length - 1 ? "Finish" : "Next" }
-                                    </button>
-                                )
-                            }
+                            <button onClick={nextQuestion} className="btn" disabled={!btnChecked}>{btnText}</button>
                         </div>
                     ) : (
-                        <div className="quiz-container">
-                            <h3>Results</h3>
-                            <h3>Overall: {result.score / 25 * 100}%</h3>
-
-                            <p>Total Questions: <span>{questions.length}</span></p>
-                            <p>Total Score: <span>{result.score}</span></p>
-                            <p>Correct Answers: <span>{result.correctAnswers}</span></p>
-                            <p>Wrong Answers: <span>{result.wrongAnswers}</span></p>
-                            <button onClick={() => window.location.reload()}>Restart</button>
-                        </div>
+                        <Results result={result} total={questions.length} />
                     )
                 }
             </div>
