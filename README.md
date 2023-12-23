@@ -1,4 +1,5 @@
 To do: 
-- [ ] Update qs
+- [ ] Update Q&As
 - [ ] Include Radix
-- [ ] Update Structure
+- [ ] Use Framer Motion to animate in and out
+- [ ] Refactor
