@@ -61,7 +61,7 @@ const QuizPage = () => {
     }
     return (
         <div className="container">
-            <h1>Quiz Page</h1>  
+            <h1>Wine Quiz</h1>  
             <div>
                 <h2>Question: {currentQuestion + 1}/<span>{questions.length}</span></h2>
             </div>

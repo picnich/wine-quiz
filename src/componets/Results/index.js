@@ -2,7 +2,7 @@ export const Results = ({ result, total }) => {
     return (
         <div className="quiz-container">
             <h3>Results</h3>
-            <h3>Overall: {result.score / 25 * 100}%</h3>
+            <h3>Overall: {result.score / (total*5) * 100}%</h3>
 
             <p>Total Questions: <span>{total}</span></p>
             <p>Total Score: <span>{result.score}</span></p>

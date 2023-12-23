@@ -44,8 +44,8 @@ export const quiz = {
       {
         id: 7,
         question: 'With one of the world’s largest collections of Napa Valley Cabernets, famed restaurant Press is an endeavor from the family behind which of these well-known wineries?',
-        answers: ['Resveratrol', 'Lactic acid', 'Acetic acid', 'Capsaicin'],
-        correctAnswer: 'Acetic acid',
+        answers: ['Harlan', 'Heitz', 'Rudd', 'Mayacamas'],
+        correctAnswer: 'Rudd',
       },
       {
         id: 8,

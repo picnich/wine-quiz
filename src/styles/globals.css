@@ -34,7 +34,7 @@ button {
   cursor: pointer;
   background-color: #808080;
   color: #f8f8f8;
-  transition: background-color 0.1s ease-in;
+  /* transition: background-color 0.1s ease-in; */
 }
 button:disabled {
   background-color: lightgray;
@@ -50,7 +50,7 @@ li {
   padding: 16px 8px;
   color: #000125;
   border: 1px solid lightgray;
-  transition: background-color 0.3s ease-in;
+  /* transition: background-color 0.3s ease-in; */
 }
 li:hover {
   background-color: #d8d8d8;
