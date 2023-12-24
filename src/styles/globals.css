@@ -3,25 +3,33 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  text-decoration: none;
 }
 
 html, body {
   overflow-x: hidden;
-  background-color: #000925;
+  /* background-color: #000925; */
 }
 
 main {
   padding: 1rem;
 }
 
-h1, h2 {
-  color: #eee;
-}
+/* h1, h2 { */
+  /* color: #eee; */
+/* } */
 
 h3 {
   padding-bottom: 2rem;
-  color: #000125;
+  /* color: #000125; */
   font-size: 1.8rem;
+}
+
+a {
+  transition: 0.2s ease-in-out opacity;
+}
+a:hover {
+  opacity: 0.5;
 }
 
 /* Button */
@@ -33,7 +41,7 @@ button {
   border-radius: 4px;
   cursor: pointer;
   background-color: #808080;
-  color: #f8f8f8;
+  /* color: #f8f8f8; */
   /* transition: background-color 0.1s ease-in; */
 }
 button:disabled {

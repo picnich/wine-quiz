@@ -1,3 +1,4 @@
+
 export const Results = ({ result, total }) => {
     return (
         <div className="quiz-container">

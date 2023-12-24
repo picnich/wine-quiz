@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { quiz } from "./data";
 import { Results } from "@/componets/Results";
+import Link from "next/link";
 
 const QuizPage = () => {
     // State
@@ -61,7 +62,9 @@ const QuizPage = () => {
     }
     return (
         <div className="container">
-            <h1>Wine Quiz</h1>  
+            <Link href="/">
+                <h1>Wine Quiz</h1>
+            </Link> 
             <div>
                 <h2>Question: {currentQuestion + 1}/<span>{questions.length}</span></h2>
             </div>
