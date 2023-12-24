@@ -11,6 +11,7 @@ const QuizPage = () => {
     const [ selectedAnswer, setSelectedAnswer ] = useState("")
     const [ btnChecked, setBtnChecked ] = useState(false)
     const [ selectedAnswerIndex, setSelectedAnswerIndex ] = useState(null)
+    const [ showAnswer, setShowAnswer ] = useState(false)
     const [ showResult, setShowResult ] = useState(false)
     const [ result, setResult ] = useState({ 
         score: 0,
@@ -29,6 +30,7 @@ const QuizPage = () => {
     function onAnswerSelected(answer, index) {
         setBtnChecked(true)
         setSelectedAnswerIndex(index)
+        setShowAnswer(true)
         if (answer === correctAnswer) {
             setSelectedAnswer(true);
             // console.log("true");
@@ -41,6 +43,7 @@ const QuizPage = () => {
     // Calculate score and inc to next q
     function nextQuestion() {
         setSelectedAnswerIndex(null);
+        setShowAnswer(false)
         
         setResult((prev) =>
             selectedAnswer ? {
@@ -74,14 +77,24 @@ const QuizPage = () => {
                         <div className="quiz-container">
                             <h3>{question}</h3>
                             <ul>
-                                {answers.map((answer, i) => (
+                                {answers.map((answer, i) => {
+                                    const answerResult = answer === correctAnswer ? "✓" : "✗";
+                                    // const bgColor = selectedAnswerIndex === i ? answer === correctAnswer ? "#056517" : "#de1a24";
+                                    const bgColor = (selectedAnswerIndex !== i) ? 'initial' : (answer === correctAnswer) ? "#056517" : "#de1a24";
+                                    return (
                                         <li 
                                             className={selectedAnswerIndex === i ? 'selected' : ''} 
                                             onClick={() => onAnswerSelected(answer, i)}
-                                            key={i}>
+                                            key={i}
+                                            style={{ backgroundColor: bgColor}}
+                                            >
+                                                {
+                                                    showAnswer ? answerResult : ""
+                                                }
                                                 <span>{answer}</span>
                                         </li>
                                     )
+                                }
                                 )}
                             </ul>
                             <button onClick={nextQuestion} className="btn" disabled={!btnChecked}>{btnText}</button>
